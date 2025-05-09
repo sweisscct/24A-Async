@@ -1,6 +1,24 @@
 const image = document.getElementById("image");
 const weatherData = document.getElementById("weather-data");
 
+let controller = new AbortController();
+const signal = controller.signal;
+
+let controller2 = new AbortController();
+const signal2 = controller2.signal;
+
+image.addEventListener("click", () => {
+    alert("Hello");
+}, { signal2 })
+
+weatherData.addEventListener("click", () => {
+    if (controller) {
+        controller.abort();
+        console.log("Alert aborted");
+    }
+
+})
+
 let imageurl = "https://static.wikia.nocookie.net/pokemon/images/2/27/0004Charmander.png/revision/latest/scale-to-width-down/1000?cb=20240714093954";
 let weatherDataUrl = "https://api.open-meteo.com/v1/forecast?latitude=53.3331&longitude=-6.2489&hourly=temperature_2m,wind_speed_10m,rain,direct_radiation";
 
